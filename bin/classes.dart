@@ -18,6 +18,13 @@ void main() {
   print(p2);
 
   // Note dart will print classes/objects are instance of, you'll need to define toString or similar to print more useful data
+
+  var james = Spy('James');
+  print(james.sayGreeting()); // Works everywhere
+  print(james._revealCodename()); // Works only in this file
+
+  var buck = Dog();
+  buck.noise();
 }
 
 class Basic {
@@ -65,5 +72,34 @@ class Point {
   Point.fromList(List data) {
     lat = data[0].toDouble();
     lng = data[1].toDouble();
+  }
+}
+
+class Spy {
+  final String name;
+  final String _codename = "Super Spy";
+
+  Spy(this.name);
+
+  sayGreeting() => 'My name is $name';
+  _revealCodename() => 'My code name is $_codename';
+}
+
+abstract class Animal {
+
+  void noise() {
+    print('Noise:');
+  }
+
+}
+
+class Dog extends Animal {
+
+  String breed = 'Labrador';
+
+  @override
+  void noise() {
+    // can use super to use original method
+    print('Woof!');
   }
 }
